@@ -1,9 +1,8 @@
-import nodemailer from 'nodemailer'
-import Mail from 'nodemailer/lib/mailer'
-import SMTPTransport from 'nodemailer/lib/smtp-transport'
 import {OurDate} from 'domain/OurDate'
 import {EmployeeRepository} from 'domain/EmployeeRepository';
 import {Employee} from 'domain/Employee';
+import {Email} from 'domain/Email';
+import {NodeMailer} from 'infrastucture/NodeMailer';
 
 export class BirthdayService {
     employeeRepository: EmployeeRepository;
@@ -15,9 +14,10 @@ export class BirthdayService {
     sendGreetings(ourDate: OurDate) {
         const birthdayEmployees = this.employeeRepository.getByBirthday(ourDate)
 
+        const nodeMailer = new NodeMailer()
         birthdayEmployees.forEach((employee) => {
             const email = this.createEmail(employee)
-            this.sendEmail('sender@here.com', email)
+            nodeMailer.send('sender@here.com', email)
         })
     }
 
@@ -28,35 +28,4 @@ export class BirthdayService {
             subject: 'Happy Birthday!'
         }
     }
-
-    private async sendEmail(sender: string, email: Email) {
-        const SMTP_PORT = 1025
-        const SMTP_URL = '127.0.0.1'
-
-        const message = {
-            host: SMTP_URL,
-            port: SMTP_PORT,
-            from: sender,
-            to: [email.recipient],
-            subject: email.subject,
-            text: email.body
-        }
-        this.deliveryMessage(message)
-    }
-
-    private async deliveryMessage({host, port, ...msg}: Message) {
-        const transport = nodemailer.createTransport({host, port})
-
-        await transport.sendMail(msg)
-    }
 }
-
-interface Email {
-    subject: string
-    body: string
-    recipient: string
-}
-
-export interface Message extends SMTPTransport.Options, Mail.Options {
-}
-
