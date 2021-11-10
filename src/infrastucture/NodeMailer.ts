@@ -2,11 +2,12 @@ import nodemailer from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 import Mail from 'nodemailer/lib/mailer';
 import {Email} from 'domain/Email';
+import {Mailer} from 'domain/Mailer';
 
 export interface Message extends SMTPTransport.Options, Mail.Options {
 }
 
-export class NodeMailer {
+export class NodeMailer implements Mailer{
     async send(sender: string, email: Email) {
         const SMTP_PORT = 1025
         const SMTP_URL = '127.0.0.1'

@@ -3,13 +3,14 @@ import { messagesSent, startMailhog, stopMailHog } from './mailhog'
 import { OurDate } from 'domain/OurDate'
 import { BirthdayService } from 'services/BirthdayService'
 import {FileEmployeeRepository} from 'infrastucture/FileEmployeeRepository';
+import {NodeMailer} from 'infrastucture/NodeMailer';
 
 describe('Acceptance', () => {
     let service: BirthdayService
 
     beforeEach(() => {
         startMailhog()
-        service = new BirthdayService(new FileEmployeeRepository())
+        service = new BirthdayService(new FileEmployeeRepository(), new NodeMailer())
     })
 
     afterEach(() => {
