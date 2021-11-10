@@ -1,7 +1,7 @@
-import { OurDate } from '../src/OurDate'
-import { BirthdayService } from '../src/BirthdayService'
-import { messagesSent, startMailhog, stopMailHog } from './mailhog'
 import flushPromises from 'flush-promises'
+import { messagesSent, startMailhog, stopMailHog } from './mailhog'
+import { OurDate } from 'domain/OurDate'
+import { BirthdayService } from 'services/BirthdayService'
 
 describe('Acceptance', () => {
 

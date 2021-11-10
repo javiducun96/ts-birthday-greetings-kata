@@ -9,7 +9,7 @@
   },
   "directories": {
     "src": "src",
-    "test": "test"
+    "test": "src/__test__"
   },
   "devDependencies": {
     "@types/jest": "~24.9.1",
