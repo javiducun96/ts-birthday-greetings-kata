@@ -7,18 +7,8 @@ import { Employee } from 'domain/Employee'
 import { OurDate } from 'domain/OurDate'
 
 export class BirthdayService {
-    sendGreetings(fileName: string, ourDate: OurDate, smtpHost: string, smtpPort: number) {
-        // get employees from file
-        const data = fs.readFileSync(path.resolve(__dirname, `../../resources/${fileName}`), 'UTF-8')
-        const lines = data.split(/\r?\n/)
-        lines.shift()
-        const employees = lines.map(line => {
-            const employeeData = line.split(', ')
-            return new Employee(employeeData[1], employeeData[0], employeeData[2], employeeData[3])
-        })
-
-        // filter employees
-        const birthdayEmployees = employees.filter(employee => employee.isBirthday(ourDate))
+    sendGreetings( ourDate: OurDate, smtpHost: string, smtpPort: number) {
+        const birthdayEmployees = getEmployeesByBirthday(ourDate)
 
         // send emails
         birthdayEmployees.forEach((employee) => {
@@ -54,4 +44,19 @@ export class BirthdayService {
 }
 
 export interface Message extends SMTPTransport.Options, Mail.Options {
+}
+
+
+const getEmployeesByBirthday = (ourDate: OurDate) => {
+    // get employees from file
+    const data = fs.readFileSync(path.resolve(__dirname, '../../resources/employee_data.txt'), 'UTF-8')
+    const lines = data.split(/\r?\n/)
+    lines.shift()
+    const employees = lines.map(line => {
+        const employeeData = line.split(', ')
+        return new Employee(employeeData[1], employeeData[0], employeeData[2], employeeData[3])
+    })
+
+    // filter employees
+    return employees.filter(employee => employee.isBirthday(ourDate))
 }
