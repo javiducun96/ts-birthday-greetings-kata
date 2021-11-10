@@ -8,23 +8,25 @@ import { OurDate } from 'domain/OurDate'
 
 export class BirthdayService {
     sendGreetings(fileName: string, ourDate: OurDate, smtpHost: string, smtpPort: number) {
+        // get employees from file
         const data = fs.readFileSync(path.resolve(__dirname, `../../resources/${fileName}`), 'UTF-8')
-
-        // split the contents by new line
         const lines = data.split(/\r?\n/)
         lines.shift()
-
-        // print all lines
-        lines.forEach((line) => {
+        const employees = lines.map(line => {
             const employeeData = line.split(', ')
-            const employee = new Employee(employeeData[1], employeeData[0], employeeData[2], employeeData[3])
-            if (employee.isBirthday(ourDate)) {
-                const recipient = employee.getEmail()
-                const body = 'Happy Birthday, dear %NAME%!'.replace('%NAME%',
-                    employee.getFirstName())
-                const subject = 'Happy Birthday!'
-                this.sendMessage(smtpHost, smtpPort, 'sender@here.com', subject, body, recipient)
-            }
+            return new Employee(employeeData[1], employeeData[0], employeeData[2], employeeData[3])
+        })
+
+        // filter employees
+        const birthdayEmployees = employees.filter(employee => employee.isBirthday(ourDate))
+
+        // send emails
+        birthdayEmployees.forEach((employee) => {
+            const recipient = employee.getEmail()
+            const body = 'Happy Birthday, dear %NAME%!'.replace('%NAME%',
+                employee.getFirstName())
+            const subject = 'Happy Birthday!'
+            this.sendMessage(smtpHost, smtpPort, 'sender@here.com', subject, body, recipient)
         })
     }
 
