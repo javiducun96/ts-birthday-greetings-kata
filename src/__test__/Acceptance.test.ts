@@ -2,6 +2,7 @@ import flushPromises from 'flush-promises'
 import { messagesSent, startMailhog, stopMailHog } from './mailhog'
 import { OurDate } from 'domain/OurDate'
 import { BirthdayService } from 'services/BirthdayService'
+import {FileEmployeeRepository} from 'infrastucture/FileEmployeeRepository';
 
 describe('Acceptance', () => {
 
@@ -12,7 +13,7 @@ describe('Acceptance', () => {
     beforeEach(() => {
         startMailhog()
 
-        service = new BirthdayService()
+        service = new BirthdayService(new FileEmployeeRepository())
     })
 
     afterEach(() => {
