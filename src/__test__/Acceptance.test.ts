@@ -5,14 +5,10 @@ import { BirthdayService } from 'services/BirthdayService'
 import {FileEmployeeRepository} from 'infrastucture/FileEmployeeRepository';
 
 describe('Acceptance', () => {
-
-    const SMTP_PORT = 1025
-    const SMTP_URL = '127.0.0.1'
     let service: BirthdayService
 
     beforeEach(() => {
         startMailhog()
-
         service = new BirthdayService(new FileEmployeeRepository())
     })
 
@@ -21,7 +17,7 @@ describe('Acceptance', () => {
     })
 
     it('base scenario', async () => {
-        service.sendGreetings(new OurDate('2008/10/08'), SMTP_URL, SMTP_PORT)
+        service.sendGreetings(new OurDate('2008/10/08'))
         await flushPromises()
 
         const messages = await messagesSent()
@@ -35,7 +31,7 @@ describe('Acceptance', () => {
     })
 
     it('will not send emails when nobodys birthday', async () => {
-        service.sendGreetings(new OurDate('2008/01/01'), SMTP_URL, SMTP_PORT)
+        service.sendGreetings(new OurDate('2008/01/01'))
         await flushPromises()
 
         const messages = await messagesSent()
