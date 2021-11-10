@@ -1,16 +1,16 @@
 import flushPromises from 'flush-promises'
-import { messagesSent, startMailhog, stopMailHog } from './mailhog'
-import { OurDate } from 'domain/OurDate'
-import { BirthdayService } from 'services/BirthdayService'
-import {FileEmployeeRepository} from 'infrastucture/FileEmployeeRepository';
+import {messagesSent, startMailhog, stopMailHog} from './mailhog'
+import {OurDate} from 'domain/OurDate'
+import {BirthdayService} from 'services/BirthdayService'
 import {NodeMailer} from 'infrastucture/NodeMailer';
+import {InMemoryEmployeeRepository} from './InMemoryEmployeeRepository';
 
 describe('Acceptance', () => {
     let service: BirthdayService
 
     beforeEach(() => {
         startMailhog()
-        service = new BirthdayService(new FileEmployeeRepository(), new NodeMailer())
+        service = new BirthdayService(new InMemoryEmployeeRepository(), new NodeMailer())
     })
 
     afterEach(() => {
