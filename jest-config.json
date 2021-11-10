@@ -8,6 +8,7 @@
   "testRegex": ".*\\.test\\.ts$",
   "moduleNameMapper": {
     "^domain/(.*)$": "<rootDir>/src/domain/$1",
-    "^services/(.*)$": "<rootDir>/src/services/$1"
+    "^services/(.*)$": "<rootDir>/src/services/$1",
+    "^infrastucture/(.*)$": "<rootDir>/src/infrastucture/$1"
   }
 }
