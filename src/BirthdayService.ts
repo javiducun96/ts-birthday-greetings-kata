@@ -1,15 +1,14 @@
 import fs from 'fs'
 import path from 'path'
 import nodemailer from 'nodemailer'
-import { Employee } from './Employee'
-import { OurDate } from './OurDate'
+import {Employee} from './Employee'
+import {OurDate} from './OurDate'
 import Mail from 'nodemailer/lib/mailer'
 import SMTPTransport from 'nodemailer/lib/smtp-transport'
 
 export class BirthdayService {
     sendGreetings(fileName: string, ourDate: OurDate, smtpHost: string, smtpPort: number) {
         const data = fs.readFileSync(path.resolve(__dirname, `../resources/${fileName}`), 'UTF-8')
-
         // split the contents by new line
         const lines = data.split(/\r?\n/)
         lines.shift()
@@ -29,7 +28,7 @@ export class BirthdayService {
     }
 
     async sendMessage(smtpHost: string, smtpPort: number, sender: string,
-        subject: string, body: string, recipient: string) {
+                      subject: string, body: string, recipient: string) {
 
         const message = {
             host: smtpHost,

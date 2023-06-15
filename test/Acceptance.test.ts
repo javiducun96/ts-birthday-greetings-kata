@@ -1,6 +1,6 @@
-import { OurDate } from '../src/OurDate'
-import { BirthdayService } from '../src/BirthdayService'
-import { messagesSent, startMailhog, stopMailHog } from './mailhog'
+import {OurDate} from '../src/OurDate'
+import {BirthdayService} from '../src/BirthdayService'
+import {deleteAllMessages, messagesSent} from './mailhog'
 import flushPromises from 'flush-promises'
 
 describe('Acceptance', () => {
@@ -10,13 +10,11 @@ describe('Acceptance', () => {
     let service: BirthdayService
 
     beforeEach(() => {
-        startMailhog()
-
         service = new BirthdayService()
     })
 
-    afterEach(() => {
-        stopMailHog()
+    afterEach(async () => {
+        await deleteAllMessages()
     })
 
     it('base scenario', async () => {
