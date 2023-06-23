@@ -20,14 +20,7 @@ export class BirthdayService {
     smtpHost: string,
     smtpPort: number
   ) {
-    const data = fs.readFileSync(
-      path.resolve(__dirname, `../resources/${fileName}`),
-      "UTF-8"
-    )
-    // split the contents by new line
-    const employeesRows = data.split(/\r?\n/)
-    employeesRows.shift()
-
+    const employeesRows = this.readEmployeesFile(fileName)
     // print all lines
     employeesRows.forEach((employeeRow) => {
       const employeeData = employeeRow.split(", ")
@@ -56,6 +49,17 @@ export class BirthdayService {
     })
   }
 
+  readEmployeesFile(fileName: string): string[] {
+    const data = fs.readFileSync(
+      path.resolve(__dirname, `../resources/${fileName}`),
+      "UTF-8"
+    )
+    // split the contents by new line
+    const employeesRows = data.split(/\r?\n/)
+    employeesRows.shift()
+    return employeesRows
+  }
+
   async sendMessage(
     smtpHost: string,
     smtpPort: number,
@@ -73,7 +77,7 @@ export class BirthdayService {
       text: body,
     }
 
-    this.deliveryMessage(message)
+    await this.deliveryMessage(message)
   }
 
   // made protected for testing :-(
