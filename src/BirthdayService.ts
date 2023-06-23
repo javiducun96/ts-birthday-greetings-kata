@@ -6,6 +6,13 @@ import { OurDate } from "./OurDate"
 import Mail from "nodemailer/lib/mailer"
 import SMTPTransport from "nodemailer/lib/smtp-transport"
 
+enum EMPLOYEE_ROW {
+  LAST_NAME = 0,
+  FIRST_NAME = 1,
+  BIRTHDAY = 2,
+  EMAIL = 3,
+}
+
 export class BirthdayService {
   sendGreetings(
     fileName: string,
@@ -25,10 +32,10 @@ export class BirthdayService {
     employeesRows.forEach((employeeRow) => {
       const employeeData = employeeRow.split(", ")
       const employee = new Employee(
-        employeeData[1],
-        employeeData[0],
-        employeeData[2],
-        employeeData[3]
+        employeeData[EMPLOYEE_ROW.FIRST_NAME],
+        employeeData[EMPLOYEE_ROW.LAST_NAME],
+        employeeData[EMPLOYEE_ROW.BIRTHDAY],
+        employeeData[EMPLOYEE_ROW.EMAIL]
       )
       if (employee.isBirthday(ourDate)) {
         const recipient = employee.getEmail()
