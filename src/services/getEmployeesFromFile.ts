@@ -21,7 +21,7 @@ const mapEmployeeFromRow = (row: string): Employee => {
 
 const readFile = (fileName: string) => {
   const data = fs.readFileSync(
-    path.resolve(__dirname, `../resources/${fileName}`),
+    path.resolve(__dirname, `../../resources/${fileName}`),
     "UTF-8"
   )
   const employeesRows = data.split(/\r?\n/)
