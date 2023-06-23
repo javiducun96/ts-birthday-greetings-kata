@@ -5,6 +5,7 @@ import { Employee } from "./Employee"
 import { OurDate } from "./OurDate"
 import Mail from "nodemailer/lib/mailer"
 import SMTPTransport from "nodemailer/lib/smtp-transport"
+import { BirthdayMail } from "./BirthdayMail"
 
 enum EMPLOYEE_ROW {
   LAST_NAME = 0,
@@ -21,24 +22,22 @@ export class BirthdayService {
     smtpPort: number
   ) {
     const employeesRows = this.readEmployeesFile(fileName)
+
     const employees = employeesRows.map(this.mapEmployeeFromRow)
+
     const birthdayEmployees = employees.filter((employee) =>
       employee.isBirthday(ourDate)
     )
     birthdayEmployees.forEach((employee) => {
-      const recipient = employee.getEmail()
-      const body = "Happy Birthday, dear %NAME%!".replace(
-        "%NAME%",
-        employee.getFirstName()
-      )
-      const subject = "Happy Birthday!"
+      const mail = new BirthdayMail(employee)
+
       this.sendMessage(
         smtpHost,
         smtpPort,
         "sender@here.com",
-        subject,
-        body,
-        recipient
+        mail.getSubject(),
+        mail.getBody(),
+        mail.getRecipient()
       )
     })
   }
