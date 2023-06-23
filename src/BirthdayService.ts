@@ -1,18 +1,10 @@
-import fs from "fs"
-import path from "path"
 import nodemailer from "nodemailer"
 import { Employee } from "./Employee"
 import { OurDate } from "./OurDate"
 import Mail from "nodemailer/lib/mailer"
 import SMTPTransport from "nodemailer/lib/smtp-transport"
 import { BirthdayMail } from "./BirthdayMail"
-
-enum EMPLOYEE_ROW {
-  LAST_NAME = 0,
-  FIRST_NAME = 1,
-  BIRTHDAY = 2,
-  EMAIL = 3,
-}
+import { getEmployeesFromFile } from "./services/getEmployeesFromFile"
 
 export class BirthdayService {
   sendGreetings(
@@ -21,9 +13,9 @@ export class BirthdayService {
     smtpHost: string,
     smtpPort: number
   ) {
-    this.getEmployeesFromFile(fileName)
-      .filter((employee) => employee.isBirthday(ourDate))
-      .forEach((employee) => {
+    getEmployeesFromFile(fileName)
+      .filter((employee: Employee) => employee.isBirthday(ourDate))
+      .forEach((employee: Employee) => {
         const mail = new BirthdayMail(employee)
 
         this.sendMessage(
@@ -35,26 +27,6 @@ export class BirthdayService {
           mail.getRecipient()
         )
       })
-  }
-
-  mapEmployeeFromRow(row: string): Employee {
-    const employeeData = row.split(", ")
-    return new Employee(
-      employeeData[EMPLOYEE_ROW.FIRST_NAME],
-      employeeData[EMPLOYEE_ROW.LAST_NAME],
-      employeeData[EMPLOYEE_ROW.BIRTHDAY],
-      employeeData[EMPLOYEE_ROW.EMAIL]
-    )
-  }
-
-  getEmployeesFromFile(fileName: string): Employee[] {
-    const data = fs.readFileSync(
-      path.resolve(__dirname, `../resources/${fileName}`),
-      "UTF-8"
-    )
-    const employeesRows = data.split(/\r?\n/)
-    employeesRows.shift()
-    return employeesRows.map(this.mapEmployeeFromRow)
   }
 
   async sendMessage(
@@ -77,7 +49,6 @@ export class BirthdayService {
     await this.deliveryMessage(message)
   }
 
-  // made protected for testing :-(
   protected async deliveryMessage({ host, port, ...msg }: Message) {
     const transport = nodemailer.createTransport({ host, port })
 
