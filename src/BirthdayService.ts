@@ -9,9 +9,7 @@ export class BirthdayService {
     getEmployeesFromFile(fileName)
       .filter((employee: Employee) => employee.isBirthday(ourDate))
       .forEach((employee: Employee) => {
-        const mail = new BirthdayMail(employee)
-
-        sendMessage(mail)
+        sendMessage(new BirthdayMail(employee))
       })
   }
 }
