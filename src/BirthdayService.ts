@@ -16,14 +16,7 @@ export class BirthdayService {
       .forEach((employee: Employee) => {
         const mail = new BirthdayMail(employee)
 
-        sendMessage(
-          smtpHost,
-          smtpPort,
-          mail.getSender(),
-          mail.getSubject(),
-          mail.getBody(),
-          mail.getRecipient()
-        )
+        sendMessage(smtpHost, smtpPort, mail)
       })
   }
 }
