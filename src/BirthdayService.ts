@@ -30,7 +30,7 @@ export class BirthdayService {
         this.sendMessage(
           smtpHost,
           smtpPort,
-          "sender@here.com",
+          mail.getSender(),
           mail.getSubject(),
           mail.getBody(),
           mail.getRecipient()
