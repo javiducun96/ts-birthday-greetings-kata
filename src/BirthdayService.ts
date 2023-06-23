@@ -21,15 +21,8 @@ export class BirthdayService {
     smtpPort: number
   ) {
     const employeesRows = this.readEmployeesFile(fileName)
-    // print all lines
-    employeesRows.forEach((employeeRow) => {
-      const employeeData = employeeRow.split(", ")
-      const employee = new Employee(
-        employeeData[EMPLOYEE_ROW.FIRST_NAME],
-        employeeData[EMPLOYEE_ROW.LAST_NAME],
-        employeeData[EMPLOYEE_ROW.BIRTHDAY],
-        employeeData[EMPLOYEE_ROW.EMAIL]
-      )
+    const employees = employeesRows.map(this.mapEmployeeFromRow)
+    employees.forEach((employee) => {
       if (employee.isBirthday(ourDate)) {
         const recipient = employee.getEmail()
         const body = "Happy Birthday, dear %NAME%!".replace(
@@ -47,6 +40,16 @@ export class BirthdayService {
         )
       }
     })
+  }
+
+  mapEmployeeFromRow(row: string): Employee {
+    const employeeData = row.split(", ")
+    return new Employee(
+      employeeData[EMPLOYEE_ROW.FIRST_NAME],
+      employeeData[EMPLOYEE_ROW.LAST_NAME],
+      employeeData[EMPLOYEE_ROW.BIRTHDAY],
+      employeeData[EMPLOYEE_ROW.EMAIL]
+    )
   }
 
   readEmployeesFile(fileName: string): string[] {
