@@ -21,25 +21,21 @@ export class BirthdayService {
     smtpHost: string,
     smtpPort: number
   ) {
-    const employeesRows = this.readEmployeesFile(fileName)
+    this.readEmployeesFile(fileName)
+      .map(this.mapEmployeeFromRow)
+      .filter((employee) => employee.isBirthday(ourDate))
+      .forEach((employee) => {
+        const mail = new BirthdayMail(employee)
 
-    const employees = employeesRows.map(this.mapEmployeeFromRow)
-
-    const birthdayEmployees = employees.filter((employee) =>
-      employee.isBirthday(ourDate)
-    )
-    birthdayEmployees.forEach((employee) => {
-      const mail = new BirthdayMail(employee)
-
-      this.sendMessage(
-        smtpHost,
-        smtpPort,
-        "sender@here.com",
-        mail.getSubject(),
-        mail.getBody(),
-        mail.getRecipient()
-      )
-    })
+        this.sendMessage(
+          smtpHost,
+          smtpPort,
+          "sender@here.com",
+          mail.getSubject(),
+          mail.getBody(),
+          mail.getRecipient()
+        )
+      })
   }
 
   mapEmployeeFromRow(row: string): Employee {
