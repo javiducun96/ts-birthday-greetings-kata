@@ -3,19 +3,18 @@ import SMTPTransport from "nodemailer/lib/smtp-transport"
 import nodemailer from "nodemailer"
 import { BirthdayMail } from "src/BirthdayMail"
 
+const SMTP_PORT = 1025
+const SMTP_URL = "127.0.0.1"
+
 const deliveryMessage = async ({ host, port, ...msg }: Message) => {
   const transport = nodemailer.createTransport({ host, port })
   await transport.sendMail(msg)
 }
 
-export const sendMessage = async (
-  smtpHost: string,
-  smtpPort: number,
-  mail: BirthdayMail
-) => {
+export const sendMessage = async (mail: BirthdayMail) => {
   const message = {
-    host: smtpHost,
-    port: smtpPort,
+    host: SMTP_URL,
+    port: SMTP_PORT,
     from: mail.getSender(),
     to: [mail.getRecipient()],
     subject: mail.getSubject(),
