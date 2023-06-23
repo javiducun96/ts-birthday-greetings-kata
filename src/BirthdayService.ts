@@ -21,8 +21,7 @@ export class BirthdayService {
     smtpHost: string,
     smtpPort: number
   ) {
-    this.readEmployeesFile(fileName)
-      .map(this.mapEmployeeFromRow)
+    this.getEmployeesFromFile(fileName)
       .filter((employee) => employee.isBirthday(ourDate))
       .forEach((employee) => {
         const mail = new BirthdayMail(employee)
@@ -48,15 +47,14 @@ export class BirthdayService {
     )
   }
 
-  readEmployeesFile(fileName: string): string[] {
+  getEmployeesFromFile(fileName: string): Employee[] {
     const data = fs.readFileSync(
       path.resolve(__dirname, `../resources/${fileName}`),
       "UTF-8"
     )
-    // split the contents by new line
     const employeesRows = data.split(/\r?\n/)
     employeesRows.shift()
-    return employeesRows
+    return employeesRows.map(this.mapEmployeeFromRow)
   }
 
   async sendMessage(
