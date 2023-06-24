@@ -2,9 +2,9 @@ import { OurDate } from "../src/models/OurDate"
 import { BirthdayService } from "../src/core/services/BirthdayService"
 import { deleteAllMessages, messagesSent } from "./mailhog"
 import flushPromises from "flush-promises"
-import { FSEmployeesRepositoy } from "../src/repositories/Employees/FSEmployeesRepository"
+import { FSEmployeesRepositoy } from "../src/core/infraestructures/repositories/Employees/FSEmployeesRepository"
 import { MailHogMailService } from "../src/core/services/Mail/MailHogMailService"
-import { NodemailerMailManager } from "../src/managers/Mail/NodemailerMailManager"
+import { NodemailerMailManager } from "../src/core/infraestructures/managers/Mail/NodemailerMailManager"
 
 describe("Acceptance", () => {
   let service: BirthdayService

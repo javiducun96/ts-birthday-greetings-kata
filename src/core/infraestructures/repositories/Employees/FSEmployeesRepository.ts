@@ -2,7 +2,7 @@ import { EmployeesRepositoryInterface as EmployeesRepository } from "./Employees
 
 import fs from "fs"
 import path from "path"
-import { Employee } from "../../models/Employee"
+import { Employee } from "../../../../models/Employee"
 
 enum EMPLOYEE_ROW {
   LAST_NAME = 0,
@@ -23,7 +23,7 @@ const mapEmployeeFromRow = (row: string): Employee => {
 
 const readFile = (fileName: string) => {
   const data = fs.readFileSync(
-    path.resolve(__dirname, `../../../resources/${fileName}`),
+    path.resolve(__dirname, `../../../../../resources/${fileName}`),
     "UTF-8"
   )
   const employeesRows = data.split(/\r?\n/)
