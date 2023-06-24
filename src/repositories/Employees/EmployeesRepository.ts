@@ -1,6 +1,8 @@
+import { EmployeesRepositoryInterface } from "./EmployeesRepositoryInterface"
+
 import fs from "fs"
 import path from "path"
-import { Employee } from "../entities/mails/Employee"
+import { Employee } from "../../entities/mails/Employee"
 
 enum EMPLOYEE_ROW {
   LAST_NAME = 0,
@@ -21,7 +23,7 @@ const mapEmployeeFromRow = (row: string): Employee => {
 
 const readFile = (fileName: string) => {
   const data = fs.readFileSync(
-    path.resolve(__dirname, `../../resources/${fileName}`),
+    path.resolve(__dirname, `../../../resources/${fileName}`),
     "UTF-8"
   )
   const employeesRows = data.split(/\r?\n/)
@@ -29,7 +31,9 @@ const readFile = (fileName: string) => {
   return employeesRows
 }
 
-export const getEmployeesFromFile = (fileName: string): Employee[] => {
-  const employeesRows = readFile(fileName)
-  return employeesRows.map(mapEmployeeFromRow)
+export class EmployeesRepositoy implements EmployeesRepositoryInterface {
+  getEmployeesFromFile(fileName: string): Employee[] {
+    const employeesRows = readFile(fileName)
+    return employeesRows.map(mapEmployeeFromRow)
+  }
 }
