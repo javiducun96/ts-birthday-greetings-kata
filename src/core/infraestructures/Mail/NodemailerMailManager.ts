@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer"
 import { BaseMail } from "src/models/mails/BaseMail"
-import { MailManager } from "./MailManager"
+import { MailManager } from "src/core/domain/Mail/MailManager"
 import Mail from "nodemailer/lib/mailer"
 
 export class NodemailerMailManager implements MailManager {
