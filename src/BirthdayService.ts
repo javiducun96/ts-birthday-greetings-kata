@@ -12,7 +12,7 @@ export class BirthdayService {
 
   sendGreetings(fileName: string, ourDate: OurDate) {
     this.employeesRepository
-      .getEmployeesFromFile(fileName)
+      .getFromFile(fileName)
       .filter((employee: Employee) => employee.isBirthday(ourDate))
       .forEach((employee: Employee) => {
         this.mailService.send(new BirthdayMail(employee))

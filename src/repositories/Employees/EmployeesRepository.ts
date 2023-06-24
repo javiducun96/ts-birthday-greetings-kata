@@ -32,7 +32,7 @@ const readFile = (fileName: string) => {
 }
 
 export class EmployeesRepositoy implements EmployeesRepositoryInterface {
-  getEmployeesFromFile(fileName: string): Employee[] {
+  getFromFile(fileName: string): Employee[] {
     const employeesRows = readFile(fileName)
     return employeesRows.map(mapEmployeeFromRow)
   }
