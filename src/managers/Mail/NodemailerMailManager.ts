@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer"
 import { BaseMail } from "src/models/mails/BaseMail"
 import { MailManager } from "./MailManager"
+import Mail from "nodemailer/lib/mailer"
 
 export class NodemailerMailManager implements MailManager {
   private transport: { host: string; port: number }
@@ -9,7 +10,7 @@ export class NodemailerMailManager implements MailManager {
   }
   async delivery(mail: BaseMail) {
     const transport = nodemailer.createTransport(this.transport)
-    const message = {
+    const message: Mail.Options = {
       from: mail.getSender(),
       to: [mail.getRecipient()],
       subject: mail.getSubject(),
