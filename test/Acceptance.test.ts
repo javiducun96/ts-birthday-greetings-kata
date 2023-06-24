@@ -4,6 +4,7 @@ import { deleteAllMessages, messagesSent } from "./mailhog"
 import flushPromises from "flush-promises"
 import { EmployeesRepositoryInterface } from "../src/repositories/Employees/EmployeesRepositoryInterface"
 import { EmployeesRepositoy } from "../src/repositories/Employees/EmployeesRepository"
+import { MailService } from "../src/services/Mail/MailService"
 
 describe("Acceptance", () => {
   let service: BirthdayService
@@ -11,7 +12,8 @@ describe("Acceptance", () => {
 
   beforeEach(() => {
     employeesRepository = new EmployeesRepositoy()
-    service = new BirthdayService(employeesRepository)
+    const mailservice = new MailService()
+    service = new BirthdayService(employeesRepository, mailservice)
   })
 
   afterEach(async () => {
