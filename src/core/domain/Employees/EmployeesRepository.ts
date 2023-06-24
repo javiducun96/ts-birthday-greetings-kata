@@ -1,5 +1,5 @@
 import { Employee } from "src/models/Employee"
 
-export interface EmployeesRepositoryInterface {
+export interface EmployeesRepository {
   getFromFile(fileName: string): Employee[]
 }
