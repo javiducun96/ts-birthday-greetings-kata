@@ -1,6 +1,6 @@
-import { Employee } from "./entities/mails/Employee"
-import { OurDate } from "./entities/mails/OurDate"
-import { BirthdayMail } from "./entities/mails/BirthdayMail"
+import { Employee } from "./models/Employee"
+import { OurDate } from "./models/OurDate"
+import { BirthdayMail } from "./models/mails/BirthdayMail"
 import { sendMessage } from "./services/sendMessage"
 import { EmployeesRepositoy } from "./repositories/Employees/EmployeesRepository"
 

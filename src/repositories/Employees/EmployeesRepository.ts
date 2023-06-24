@@ -2,7 +2,7 @@ import { EmployeesRepositoryInterface } from "./EmployeesRepositoryInterface"
 
 import fs from "fs"
 import path from "path"
-import { Employee } from "../../entities/mails/Employee"
+import { Employee } from "../../models/Employee"
 
 enum EMPLOYEE_ROW {
   LAST_NAME = 0,

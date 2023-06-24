@@ -1,5 +1,5 @@
-import { OurDate } from "../src/entities/mails/OurDate"
-import { Employee } from "../src/entities/mails/Employee"
+import { OurDate } from "../src/models/OurDate"
+import { Employee } from "../src/models/Employee"
 
 describe("Employee", () => {
   it("is birthday", () => {

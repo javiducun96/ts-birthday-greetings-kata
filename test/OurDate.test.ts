@@ -1,4 +1,4 @@
-import { OurDate } from "../src/entities/mails/OurDate"
+import { OurDate } from "../src/models/OurDate"
 
 describe("OurDate", () => {
   it("getters", () => {

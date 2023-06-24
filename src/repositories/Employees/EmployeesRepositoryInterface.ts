@@ -1,4 +1,4 @@
-import { Employee } from "src/entities/mails/Employee"
+import { Employee } from "src/models/Employee"
 
 export interface EmployeesRepositoryInterface {
   getEmployeesFromFile(fileName: string): Employee[]
