@@ -2,16 +2,14 @@ import { OurDate } from "../src/models/OurDate"
 import { BirthdayService } from "../src/BirthdayService"
 import { deleteAllMessages, messagesSent } from "./mailhog"
 import flushPromises from "flush-promises"
-import { EmployeesRepositoryInterface } from "../src/repositories/Employees/EmployeesRepositoryInterface"
 import { EmployeesRepositoy } from "../src/repositories/Employees/EmployeesRepository"
 import { MailService } from "../src/services/Mail/MailService"
 
 describe("Acceptance", () => {
   let service: BirthdayService
-  let employeesRepository: EmployeesRepositoryInterface
 
   beforeEach(() => {
-    employeesRepository = new EmployeesRepositoy()
+    const employeesRepository = new EmployeesRepositoy()
     const mailservice = new MailService()
     service = new BirthdayService(employeesRepository, mailservice)
   })
