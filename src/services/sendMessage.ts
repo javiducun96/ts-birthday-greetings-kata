@@ -1,7 +1,7 @@
 import Mail from "nodemailer/lib/mailer"
 import SMTPTransport from "nodemailer/lib/smtp-transport"
 import nodemailer from "nodemailer"
-import { BaseMail } from "src/entities/mails/BaseMail"
+import { BaseMail } from "src/models/mails/BaseMail"
 
 const SMTP_PORT = 1025
 const SMTP_URL = "127.0.0.1"
