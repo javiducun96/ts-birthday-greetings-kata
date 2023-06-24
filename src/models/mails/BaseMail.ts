@@ -17,6 +17,7 @@ export class BaseMail {
   getBody() {
     return this._body
   }
+
   getSubject() {
     return this._subject
   }

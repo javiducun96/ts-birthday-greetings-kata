@@ -2,12 +2,16 @@ import { OurDate } from "../src/models/OurDate"
 import { BirthdayService } from "../src/BirthdayService"
 import { deleteAllMessages, messagesSent } from "./mailhog"
 import flushPromises from "flush-promises"
+import { EmployeesRepositoryInterface } from "../src/repositories/Employees/EmployeesRepositoryInterface"
+import { EmployeesRepositoy } from "../src/repositories/Employees/EmployeesRepository"
 
 describe("Acceptance", () => {
   let service: BirthdayService
+  let employeesRepository: EmployeesRepositoryInterface
 
   beforeEach(() => {
-    service = new BirthdayService()
+    employeesRepository = new EmployeesRepositoy()
+    service = new BirthdayService(employeesRepository)
   })
 
   afterEach(async () => {
