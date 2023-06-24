@@ -1,6 +1,6 @@
 import fs from "fs"
 import path from "path"
-import { Employee } from "../Employee"
+import { Employee } from "../entities/mails/Employee"
 
 enum EMPLOYEE_ROW {
   LAST_NAME = 0,

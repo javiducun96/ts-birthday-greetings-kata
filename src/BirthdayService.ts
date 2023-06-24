@@ -1,5 +1,5 @@
-import { Employee } from "./Employee"
-import { OurDate } from "./OurDate"
+import { Employee } from "./entities/mails/Employee"
+import { OurDate } from "./entities/mails/OurDate"
 import { BirthdayMail } from "./entities/mails/BirthdayMail"
 import { getEmployeesFromFile } from "./services/getEmployeesFromFile"
 import { sendMessage } from "./services/sendMessage"
