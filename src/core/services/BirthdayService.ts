@@ -2,7 +2,7 @@ import { Employee } from "../domain/Employees/Employee"
 import { OurDate } from "../domain/OurDate"
 import { BirthdayMail } from "../domain/Mail/BirthdayMail"
 import { EmployeesRepository } from "../domain/Employees/EmployeesRepository"
-import { MailServiceInterface as MailService } from "../domain/Mail/MailService"
+import { MailService } from "../domain/Mail/MailService"
 
 export class BirthdayService {
   constructor(

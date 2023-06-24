@@ -1,5 +1,5 @@
 import { BaseMail } from "src/core/domain/Mail/BaseMail"
-import { MailServiceInterface as MailService } from "../../domain/Mail/MailService"
+import { MailService } from "../../domain/Mail/MailService"
 import { MailManager } from "src/core/domain/Mail/MailManager"
 
 export class MailHogMailService implements MailService {

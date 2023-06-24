@@ -1,4 +1,4 @@
-import { EmployeesRepository as EmployeesRepository } from "../../domain/Employees/EmployeesRepository"
+import { EmployeesRepository } from "../../domain/Employees/EmployeesRepository"
 
 import fs from "fs"
 import path from "path"
