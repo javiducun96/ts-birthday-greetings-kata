@@ -1,4 +1,4 @@
-export class BaseMail {
+export abstract class BaseMail {
   constructor(
     private _sender: string,
     private _recipient: string,
