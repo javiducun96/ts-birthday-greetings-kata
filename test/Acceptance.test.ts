@@ -4,13 +4,19 @@ import { deleteAllMessages, messagesSent } from "./mailhog"
 import flushPromises from "flush-promises"
 import { FSEmployeesRepositoy } from "../src/repositories/Employees/FSEmployeesRepository"
 import { MailHogMailService } from "../src/services/Mail/MailHogMailService"
+import { NodemailerMailManager } from "../src/managers/Mail/NodemailerMailManager"
 
 describe("Acceptance", () => {
   let service: BirthdayService
 
   beforeEach(() => {
+    const SMTP_PORT = 1025
+    const SMTP_URL = "127.0.0.1"
+
     const employeesRepository = new FSEmployeesRepositoy()
-    const mailservice = new MailHogMailService()
+    const mailservice = new MailHogMailService(
+      new NodemailerMailManager(SMTP_URL, SMTP_PORT)
+    )
     service = new BirthdayService(employeesRepository, mailservice)
   })
 
