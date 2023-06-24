@@ -2,7 +2,7 @@ import { EmployeesRepository as EmployeesRepository } from "../../domain/Employe
 
 import fs from "fs"
 import path from "path"
-import { Employee } from "../../../models/Employee"
+import { Employee } from "../../domain/Employees/Employee"
 
 enum EMPLOYEE_ROW {
   LAST_NAME = 0,

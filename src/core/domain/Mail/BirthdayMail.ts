@@ -1,5 +1,5 @@
 import { BaseMail } from "./BaseMail"
-import { Employee } from "../Employee"
+import { Employee } from "../Employees/Employee"
 
 export class BirthdayMail extends BaseMail {
   constructor(employee: Employee) {

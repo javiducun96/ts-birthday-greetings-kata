@@ -1,4 +1,4 @@
-import { OurDate } from "../src/models/OurDate"
+import { OurDate } from "../src/core/domain/OurDate"
 import { BirthdayService } from "../src/core/services/BirthdayService"
 import { deleteAllMessages, messagesSent } from "./mailhog"
 import flushPromises from "flush-promises"
