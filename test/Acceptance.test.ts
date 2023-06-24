@@ -1,5 +1,5 @@
 import { OurDate } from "../src/models/OurDate"
-import { BirthdayService } from "../src/BirthdayService"
+import { BirthdayService } from "../src/services/BirthdayService"
 import { deleteAllMessages, messagesSent } from "./mailhog"
 import flushPromises from "flush-promises"
 import { EmployeesRepositoy } from "../src/repositories/Employees/EmployeesRepository"

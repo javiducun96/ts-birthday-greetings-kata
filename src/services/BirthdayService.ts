@@ -1,8 +1,8 @@
-import { Employee } from "./models/Employee"
-import { OurDate } from "./models/OurDate"
-import { BirthdayMail } from "./models/mails/BirthdayMail"
-import { EmployeesRepositoryInterface } from "./repositories/Employees/EmployeesRepositoryInterface"
-import { MailServiceInterface } from "./services/Mail/MailServiceInterface"
+import { Employee } from "../models/Employee"
+import { OurDate } from "../models/OurDate"
+import { BirthdayMail } from "../models/mails/BirthdayMail"
+import { EmployeesRepositoryInterface } from "../repositories/Employees/EmployeesRepositoryInterface"
+import { MailServiceInterface } from "./Mail/MailServiceInterface"
 
 export class BirthdayService {
   constructor(
