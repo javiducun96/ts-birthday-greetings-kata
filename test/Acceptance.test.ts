@@ -3,14 +3,14 @@ import { BirthdayService } from "../src/services/BirthdayService"
 import { deleteAllMessages, messagesSent } from "./mailhog"
 import flushPromises from "flush-promises"
 import { FSEmployeesRepositoy } from "../src/repositories/Employees/FSEmployeesRepository"
-import { MailService } from "../src/services/Mail/MailService"
+import { MailHogMailService } from "../src/services/Mail/MailHogMailService"
 
 describe("Acceptance", () => {
   let service: BirthdayService
 
   beforeEach(() => {
     const employeesRepository = new FSEmployeesRepositoy()
-    const mailservice = new MailService()
+    const mailservice = new MailHogMailService()
     service = new BirthdayService(employeesRepository, mailservice)
   })
 
